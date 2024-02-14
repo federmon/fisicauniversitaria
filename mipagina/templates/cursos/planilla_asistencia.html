@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Planillas de Asistencia</h2>
+{% for fecha in asistencias_por_fecha.keys %}
+    <a href="{% url 'asistencia_por_fecha' year=fecha.year month=fecha.month day=fecha.day curso_id=curso_id %}" class="btn btn-primary">
+        {{ fecha }}
+    </a>
+{% empty %}
+    <p>No hay registros de asistencia.</p>
+{% endfor %}
+{% endblock %}

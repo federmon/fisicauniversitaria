@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ curso.nombre_del_curso }}</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <h2>{{ alumno_actual.apellido }} {{ alumno_actual.nombre }}</h2>
+    <!-- Campos ocultos o deshabilitados para el alumno y el curso actual -->
+    <input type="hidden" name="alumno" value="{{ alumno_actual.id }}">
+    <input type="hidden" name="curso" value="{{ curso.id }}">
+    <!-- Botones para la asistencia -->
+    <button type="submit" name="presente" value="True">Presente</button>
+    <button type="submit" name="ausente" value="False">Ausente</button>
+    <!-- Campo oculto para el ID del siguiente alumno -->
+    {% if next_alumno %}
+    <input type="hidden" name="next_alumno_id" value="{{ next_alumno.id }}">
+    {% endif %}
+</form>
+
+<a href="{% url 'detalle_curso' curso_id=curso.id %}">Volver al Detalle del Curso</a>
+{% endblock %}

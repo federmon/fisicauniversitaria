@@ -1,0 +1,10 @@
+{% extends 'base.html' %}  <!-- Asume que tienes una plantilla base -->
+
+{% block content %}
+  <h2>Crear Curso</h2>
+  <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Crear Curso</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Asistencia para el {{ fecha|date:"d/m/Y" }}</h2>
+
+{% if asistencias %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nombre del Alumno</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            {% for asistencia in asistencias %}
+            <tr>
+                <td>{{asistencia.alumno.apellido}} {{ asistencia.alumno.nombre }}</td>
+                <td>{{ asistencia.presente|yesno:"Presente,Ausente" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No hay registros de asistencia para esta fecha.</p>
+{% endif %}
+
+<a href="{% url 'planilla_asistencia' curso_id=curso_id %}">Volver</a>
+{% endblock %}

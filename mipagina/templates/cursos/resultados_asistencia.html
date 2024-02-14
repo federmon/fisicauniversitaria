@@ -1,0 +1,7 @@
+<h2>Resultados de Asistencia para {{ curso.nombre_del_curso }}</h2>
+<p><strong>Presentes:</strong> {{ presentes }}</p>
+<p><strong>Ausentes:</strong> {{ ausentes }}</p>
+<p><strong>Total de Alumnos:</strong> {{ total }}</p>
+
+<a href="{% url 'curso' pk=curso.id %}">Volver al curso</a> 
+

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <h1>Lista de cursos</h1>
+
+    {% if cursos %}
+        <ul>
+            {% for curso in cursos %}
+                <li>
+                    <a href="{% url 'curso' pk=curso.id %}">{{ curso.nombre_del_curso }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay cursos disponibles.</p>
+    {% endif %}
+
+<a href="{% url 'crear_curso' %}" class="btn btn-primary" >Crear nuevo curso</a>
+{% endblock %}
+
+

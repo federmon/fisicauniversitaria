@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Detalle del curso</title>
+{% endblock %}
+
+{% block content %}
+
+<li>Nombre del curso: {{ curso.nombre_del_curso }}</li>
+<li>Profesor: {{ curso.profesor }}</li>
+
+<style>
+    .espacio-entre-botones {
+      margin-bottom: 16px; 
+      }
+    .espacio-btn {
+       margin-left: 16px; 
+      }
+  </style>
+
+<h2>Alumnos:</h2>
+<ul>
+    {% for alumno in alumnos %}
+        <li>
+            <a href="{% url 'detalle_alumno' alumno.id curso.id %}">
+                {{ alumno.apellido }} {{ alumno.nombre }}
+            </a>
+            <form method="post" action="{% url 'eliminar_alumno' curso.id alumno.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger btn-sm espacio-entre-botones espacio-btn">Eliminar</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+
+<form method="post" action="{% url 'agregar_alumno' curso.id %}" class="mb-3">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Agregar Alumno</button>
+</form>
+
+{% if curso.alumnos.all %}
+    <div class="mb-2">
+        {% with curso.alumnos.first as primer_alumno %}
+            <a href="{% url 'tomar_asistencia' curso_id=curso.id alumno_id=primer_alumno.id %}" class="btn btn-primary">Tomar Asistencia</a>
+        {% endwith %}
+    </div>
+    <div>
+        <a href="{% url 'planilla_asistencia' curso.id %}" class="btn btn-secondary">Ver Planillas de Asistencia</a>
+    </div>
+{% else %}
+    <p>No hay alumnos en este curso.</p>
+{% endif %}
+
+{% endblock %}

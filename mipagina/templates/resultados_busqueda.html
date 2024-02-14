@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>Resultados de Búsqueda</h1>
+
+<h2>Resultados para "{{ query }}"</h2>
+
+    <h3>Cursos:</h3>
+    <ul>
+        {% for curso in resultados_cursos %}
+            <li>{{ curso.nombre_del_curso }} - Profesor: {{ curso.profesor }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Alumnos:</h3>
+    <ul>
+        {% for alumno in resultados_alumnos %}
+            <li>{{ alumno.nombre }} {{ alumno.apellido }} - Edad: {{ alumno.edad }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

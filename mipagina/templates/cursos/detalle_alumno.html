@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<h1>Detalle del Alumno</h1>
+
+<p>Apellido: {{ alumno.apellido }}</p>
+<p>Nombre: {{ alumno.nombre }}</p>
+<p>Número de Contacto: {{ alumno.numero_de_contacto }}</p>
+<p>Adeuda Cuota: {{ alumno.adeuda_cuota|yesno:"Sí,No" }}</p>
+
+<!-- Puedes agregar más detalles que consideres necesarios -->
+<a href="{% url 'detalle_curso' curso_id=curso.id %}">Volver</a>
+
+{% endblock %}
